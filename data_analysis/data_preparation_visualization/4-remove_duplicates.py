@@ -2,7 +2,6 @@
 """
 Module to handle removing duplicate rows from a DataFrame.
 """
-import pandas as pd
 
 
 def remove_duplicates(df):
