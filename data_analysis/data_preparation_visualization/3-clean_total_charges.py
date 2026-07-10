@@ -18,10 +18,10 @@ def clean_total_charges(df, method='drop'):
             df = df.dropna(subset=['TotalCharges'])
         case 'median':
             median_TC = df['TotalCharges'].median()
-            df['TotalCharges'] = df['TotalCharges'].fillna(median_TC)
+            df.loc[:, 'TotalCharges'] = df['TotalCharges'].fillna(median_TC)
         case 'impute':
             imputation = df['MonthlyCharges'] * df['tenure']
-            df['TotalCharges'] = df['TotalCharges'].fillna(imputation)
+            df.loc[:, 'TotalCharges'] = df['TotalCharges'].fillna(imputation)
         case _:
             raise ValueError(f"Unknown cleaning method: {method}")
     return df
