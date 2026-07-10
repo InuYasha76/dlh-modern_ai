@@ -2,7 +2,6 @@
 """
 Module to remove non-predictive identifier columns from a DataFrame.
 """
-import pandas as pd
 
 
 def drop_customerID(df):
