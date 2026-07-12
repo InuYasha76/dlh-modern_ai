@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+"""This module is about data vizualisation."""
+
+
 import matplotlib.pyplot as plt
 
 
