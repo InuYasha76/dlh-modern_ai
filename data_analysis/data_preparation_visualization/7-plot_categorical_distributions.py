@@ -26,8 +26,7 @@ def plot_categorical_distributions(df, columns_to_plot=None):
     """
     if columns_to_plot is None:
         columns_to_plot = [
-            col for col in df.columns 
-            if str(df[col].dtype) in ('object', 'string', 'str')
+            col for col in df.columns if df[col].dtype == 'object' 
             and col != 'Churn'
         ]
     else:
