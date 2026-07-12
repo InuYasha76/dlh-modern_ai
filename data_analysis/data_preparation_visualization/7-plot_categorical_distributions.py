@@ -17,8 +17,7 @@ def plot_categorical_distributions(df, columns_to_plot=None):
     """
     if columns_to_plot is None:
         columns_to_plot = [
-            col
-            for col in df.columns
+            col for col in df.columns
             if (str(df[col].dtype) in ("object", "str", "string") and
                 col != "Churn")
         ]
@@ -30,7 +29,8 @@ def plot_categorical_distributions(df, columns_to_plot=None):
 
     axes = axes.flatten() if n_rows * n_cols > 1 else [axes]
     for i, col in enumerate(columns_to_plot):
-        df[col].value_counts().plot(kind="bar", ax=axes[i])
+        counts = df[col].value_counts()
+        axes[i].bar(counts.index.tolist(), counts.values)
         axes[i].set_title(col)
         axes[i].tick_params(axis="x", rotation=45)
 
