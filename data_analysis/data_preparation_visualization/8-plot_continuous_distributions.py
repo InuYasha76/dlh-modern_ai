@@ -31,7 +31,7 @@ def plot_continuous_distributions(df, columns_to_plot=None):
     for i, col in enumerate(columns_to_plot):
         data = df[col].dropna()
         kde = stats.gaussian_kde(data)
-        x_range = np.linspace(data.min(), data.max(), 500)
+        x_range = np.linspace(data.min(), data.max(), 100)
         axes[i, 0].hist(data, bins=30, density=True, alpha=0.7, edgecolor="black")
         axes[i, 0].plot(x_range, kde(x_range), color="red", linestyle="--")
         axes[i, 0].set_title(f"{col} Histogram + KDE")
