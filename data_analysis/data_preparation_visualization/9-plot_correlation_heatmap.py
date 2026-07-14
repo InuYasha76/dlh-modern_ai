@@ -22,5 +22,4 @@ def plot_correlation_heatmap(df):
     sns.heatmap(correlation_matrix, annot=True, cmap="coolwarm",
                 vmin=-1, vmax=1)
     plt.title("Correlation Matrix")
-    plt.tight_layout()
     plt.show()
