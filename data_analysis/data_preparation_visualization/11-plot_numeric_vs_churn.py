@@ -19,10 +19,10 @@ def plot_numeric_vs_churn(df, col):
         Plot the distribution by churn of the column.
     """
     plt.figure(figsize=(12, 8))
-    churn_no = df.loc[df['Churn'] == 'No', col].dropna()
-    churn_yes = df.loc[df['Churn'] == 'Yes', col].dropna()
-    plt.hist([churn_no, churn_yes], bins=30, label=['No', 'Yes'])
+    churn_no = df.loc[df["Churn"] == "No", col].dropna()
+    churn_yes = df.loc[df["Churn"] == "Yes", col].dropna()
+    plt.hist([churn_no, churn_yes], bins=30, label=["No", "Yes"])
     plt.title(f"{col} Distribution by Churn")
     plt.xlabel(col)
-    plt.legend(title='Churn')
+    plt.legend(title="Churn")
     plt.show()

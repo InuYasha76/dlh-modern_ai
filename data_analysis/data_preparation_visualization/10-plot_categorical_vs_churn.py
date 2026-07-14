@@ -14,7 +14,7 @@ def plot_categorical_vs_churn(df, col):
         The function displays the generated bar plot directly.
     """
     plt.figure(figsize=(12, 8))
-    churn_rate = (df['Churn'] == 'Yes').groupby(df[col]).mean()
+    churn_rate = (df["Churn"] == "Yes").groupby(df[col]).mean()
     plt.bar(churn_rate.index, churn_rate.values)
     plt.title(f"Churn Rate by {col}")
     plt.ylabel("Churn Rate")

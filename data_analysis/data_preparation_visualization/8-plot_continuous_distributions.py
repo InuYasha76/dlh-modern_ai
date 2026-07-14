@@ -22,7 +22,7 @@ def plot_continuous_distributions(df, columns_to_plot=None):
         The function displays the plot grid and saves it to 'Task_8.png'.
     """
     if columns_to_plot is None:
-        cols = df.select_dtypes(include=[np.number]).column
+        cols = df.select_dtypes(include=[np.number]).columns
         columns_to_plot = cols
     n_cols = len(columns_to_plot)
     fig, axes = plt.subplots(n_cols, 2, figsize=(10, 3 * n_cols))
@@ -32,8 +32,8 @@ def plot_continuous_distributions(df, columns_to_plot=None):
         data = df[col].dropna()
         kde = stats.gaussian_kde(data)
         x_range = np.linspace(data.min(), data.max(), 500)
-        axes[i, 0].hist(data, bins=30, density=True, alpha=0.7, edgecolor='b')
-        axes[i, 0].plot(x_range, kde(x_range), color='r', linestyle="--")
+        axes[i, 0].hist(data, bins=30, density=True, alpha=0.7, edgecolor="black")
+        axes[i, 0].plot(x_range, kde(x_range), color="r", linestyle="--")
         axes[i, 0].set_title(f"{col} Histogram + KDE")
         axes[i, 1].boxplot(data, vert=False)
         axes[i, 1].set_title(f"{col} Boxplot")
