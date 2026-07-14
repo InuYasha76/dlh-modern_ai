@@ -17,8 +17,10 @@ def plot_correlation_heatmap(df):
         The darker the hue, the highest the correlation.
     """
     plt.figure(figsize=(6, 5))
-    data = df.select_dtypes(include="number")
-    corr_matrix = data.corr()
-    sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", vmin=-1, vmax=1)
+    data = df.select_dtypes(include=["number"])
+    correlation_matrix = data.corr()
+    sns.heatmap(correlation_matrix, annot=True, cmap="coolwarm",
+                vmin=-1, vmax=1)
+    plt.title("Correlation Matrix")
     plt.tight_layout()
     plt.show()
