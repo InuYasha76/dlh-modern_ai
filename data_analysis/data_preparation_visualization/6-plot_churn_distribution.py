@@ -14,7 +14,7 @@ def plot_churn_distribution(df):
         None
     """
     plt.figure(figsize=(12, 8))
-    df['Churn'].value_counts().plot.bar(color=['skyblue', 'salmon'])
-    plt.title('Churn Distribution')
-    plt.ylabel('Count')
+    df["Churn"].value_counts().plot.bar(color=["skyblue", "salmon"])
+    plt.title("Churn Distribution")
+    plt.ylabel("Count")
     plt.show()

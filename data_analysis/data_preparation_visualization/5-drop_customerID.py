@@ -12,4 +12,4 @@ def drop_customerID(df):
     Returns:
         pandas.DataFrame: The modified DataFrame without the customerID column.
     """
-    return df.drop(columns=['customerID'])
+    return df.drop(columns=["customerID"])

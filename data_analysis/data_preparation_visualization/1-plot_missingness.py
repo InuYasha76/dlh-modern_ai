@@ -10,13 +10,13 @@ def plot_missingness(df):
     """
     Generates a scatter plot showing the location of missing values in df.
     Args:
-        - df (pandas.DataFrame): DataFrame to analyze for missing values.
+        df (pandas.DataFrame): DataFrame to analyze for missing values.
     Returns:
-        - None
+        None
     """
     plt.figure(figsize=(12, 8))
-    plt.scatter(np.where(df.isna())[0], np.where(df.isna())[1], marker='|')
+    plt.scatter(np.where(df.isna())[0], np.where(df.isna())[1], marker="|")
     plt.yticks(range(len(df.columns)), df.columns)
-    plt.title('Missingness Plot')
+    plt.title("Missingness Plot")
     plt.tight_layout()
     plt.show()

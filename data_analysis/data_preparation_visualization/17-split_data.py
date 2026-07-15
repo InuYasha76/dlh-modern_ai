@@ -7,7 +7,7 @@ from sklearn import model_selection
 
 def split_data(df, target="Churn", test_size=0.2, random_state=42):
     """
-    Split a DataFrame into stratified train and test sets.
+    Splits data into train/test sets using stratified sampling.
     Args:
         df (pandas.DataFrame): The input DataFrame.
         target (str): Name of the target column.
