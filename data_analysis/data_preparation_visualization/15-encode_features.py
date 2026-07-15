@@ -28,7 +28,8 @@ def encode_features(df):
         "SeniorCitizen"
     ]
     binary_oe = preprocessing.OrdinalEncoder(categories=[['No', 'Yes']])
-    df[binary_cols] = binary_oe.fit_transform(df[binary_cols]).astype("int")
+    for col in binary_cols:
+        df[col] = binary_oe.fit_transform(df[[col]]).astype(int)
 
     # Step 3: One-hot encoding for Contract and PaymentMethod
     df = pd.get_dummies(
