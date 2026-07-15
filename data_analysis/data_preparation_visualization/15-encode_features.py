@@ -15,7 +15,7 @@ def encode_features(df):
         fitted binary OrdinalEncoder, fitted TenureGroup OrdinalEncoder)
     """
     df = df.copy()
-    
+
     # Step 1: LabelEncoder for Churn
     churn_le = preprocessing.LabelEncoder()
     df["Churn"] = churn_le.fit_transform(df["Churn"])
@@ -27,15 +27,21 @@ def encode_features(df):
         "PaperlessBilling",
         "SeniorCitizen"
     ]
-    binary_oe = preprocessing.OrdinalEncoder()
+    binary_oe = preprocessing.OrdinalEncoder(categories=[['No', 'Yes']])
     df[binary_cols] = binary_oe.fit_transform(df[binary_cols]).astype("int")
 
     # Step 3: One-hot encoding for Contract and PaymentMethod
-    df = pd.get_dummies(df, columns=['Contract', 'PaymentMethod'],
-                         drop_first=True, dtype=int)
+    df = pd.get_dummies(
+        df,
+        columns=['Contract', 'PaymentMethod'],
+        drop_first=True,
+        dtype=int
+    )
 
     # Step 4: OrdinalEncoder for TenureGroup
     tenure_oe = preprocessing.OrdinalEncoder()
-    df["TenureGroup"] = tenure_oe.fit_transform(df[["TenureGroup"]]).astype("int")
+    df["TenureGroup"] = tenure_oe.fit_transform(
+        df[["TenureGroup"]]
+    ).astype("int")
 
     return df, churn_le, binary_oe, tenure_oe
