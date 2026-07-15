@@ -27,12 +27,10 @@ def encode_features(df):
         "PaperlessBilling",
         "SeniorCitizen"
     ]
-    binar_oe = preprocessing.OrdinalEncoder(categories=[["No", "Yes"]])
-    for col in binary_cols:
-        df_encoded[col] = df_encoded[col].replace(
-            {0: "No", 1: "Yes", "0": "No", "1": "Yes"}
-        )
-    df_encoded[col] = binar_oe.fit_transform(df_encoded[[col]]).astype("int64")
+    binary_oe = preprocessing.OrdinalEncoder(categories=[["No", "Yes"]] * 4)
+    df_encoded[binary_cols] = binary_oe.fit_transform(
+        df_encoded[binary_cols]
+    ).astype("int64")
 
     # Step 3: One-hot encoding for Contract and PaymentMethod
     one_hot_cols = ["Contract", "PaymentMethod"]
@@ -50,4 +48,4 @@ def encode_features(df):
         df_encoded[["TenureGroup"]]
     ).astype("int64")
 
-    return df_encoded, churn_le, binar_oe, tenure_oe
+    return df_encoded, churn_le, binary_oe, tenure_oe
