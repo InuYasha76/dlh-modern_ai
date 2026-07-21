@@ -3,7 +3,7 @@
 This module provides a function to display the textual decision structure of a
 decision tree classifier using Scikit-learn.
 """
-from sklearn.tree import export_text
+from sklearn import tree
 
 
 def draw(clf, feature_names, class_names):
@@ -16,7 +16,7 @@ def draw(clf, feature_names, class_names):
     Returns:
         None
     """
-    tree_rules = export_text(
+    tree_rules = tree.export_text(
         clf, feature_names=list(feature_names), class_names=list(class_names)
     )
     print(tree_rules, end="")

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """(Post-Pruning) Train and Evaluate Decision Trees with Pruning."""
 from sklearn import tree
-from train import train_tree
+train_tree = __import__('1-train').train_tree
 
 
 def prune_and_evaluate_trees(

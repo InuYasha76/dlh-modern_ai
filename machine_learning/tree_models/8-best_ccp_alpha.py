@@ -16,13 +16,15 @@ def get_best_alpha(clfs, train_scores, test_scores, ccp_alphas):
         best_clf: The classifier associated with best_alpha.
     """
     max_test_score = max(test_scores)
-    candidates = [i for i, score in enumerate(test_scores)
-                  if score == max_test_score
-                  ]
-    min_gap = min(abs(train_scores[i] - test_scores[i]) for i in candidates)
-    candidates = [i for i in candidates
-                  if abs(train_scores[i] - test_scores[i]) == min_gap
-                  ]
+    candidates = [
+            i for i, score in enumerate(test_scores)
+            if (max_test_score - score) <= 1e-9
+    ]
+    min_gaps = min((train_scores[i] - test_scores[i]) for i in candidates)
+    candidates = [
+            i for i in candidates
+            if (train_scores[i] - test_scores[i]) - min_gaps <= 1e-9
+    ]
     best_index = max(candidates, key=lambda i: ccp_alphas[i])
     best_alpha = ccp_alphas[best_index]
     best_clf = clfs[best_index]
