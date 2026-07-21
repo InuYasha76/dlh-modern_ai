@@ -19,4 +19,4 @@ def draw(clf, feature_names, class_names):
     tree_rules = tree.export_text(
         clf, feature_names=list(feature_names), class_names=list(class_names)
     )
-    print(tree_rules, end="")
+    print(tree_rules)
