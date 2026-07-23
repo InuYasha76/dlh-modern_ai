@@ -1,15 +1,5 @@
 #!/usr/bin/env python3
-"""
-Logistic Regression Classifier Module.
-
-This module provides a utility function to instantiate an untrained
-Logistic Regression model for binary and multiclass classification tasks
-using Scikit-Learn.
-
-Functions:
-    Logistic_Regression_Model(random_state): Returns an untrained
-    LogisticRegression model instance configured with a specific random seed.
-"""
+"""Logistic Regression Classifier Module."""
 
 from sklearn import linear_model
 

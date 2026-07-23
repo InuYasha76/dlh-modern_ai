@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-"""
-Lasso Regression Module.
-
-This module provides a utility function to instantiate an untrained
-Lasso Regression model with L1 regularization using Scikit-Learn.
-
-Functions:
-    lasso_regression(random_state): Returns an untrained Lasso model instance
-    configured with a specific random seed.
-"""
+"""Lasso Regression Module."""
 
 from sklearn import linear_model
 

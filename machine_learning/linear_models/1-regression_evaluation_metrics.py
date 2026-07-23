@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-"""
-Regression Evaluation Metrics Module.
-This module provides a utility function to compute fundamental evaluation
-metrics (MSE, RMSE, MAE, and R^2 Score) for regression models using
-Scikit-Learn and NumPy.
-
-Functions:
-    evaluation_metrics_for_regression(y_true, y_pred): Calculates and
-    returns regression performance metrics as a tuple.
-"""
+"""Evaluation Metrics for regression."""
 
 from sklearn import metrics
 import numpy as np

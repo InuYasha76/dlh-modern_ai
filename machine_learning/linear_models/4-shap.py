@@ -1,16 +1,5 @@
 #!/usr/bin/env python3
-"""
-SHAP Model Explainability Module.
-
-This module provides utility functions to compute SHAP (SHapley Additive
-exPlanations) values to explain regression model predictions using training
-and test datasets.
-
-Functions:
-    get_shap_explainer_and_values(model, X_train, X_test): Instantiates
-    a SHAP explainer on training background data and computes SHAP values
-    for test samples.
-"""
+"""SHAP Model Explainability Module."""
 
 import shap
 

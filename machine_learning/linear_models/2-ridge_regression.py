@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-"""
-Ridge Regression Module.
-
-This module provides a utility function to instantiate an untrained
-Ridge Regression model with L2 regularization using Scikit-Learn.
-
-Functions:
-    ridge_regression(random_state): Returns an untrained Ridge model instance
-    configured with a specific random seed.
-"""
+"""Ridge Regression Module."""
 
 from sklearn import linear_model
 
