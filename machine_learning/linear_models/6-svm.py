@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
-"""Logistic Regression Classifier Module."""
+"""Support Vector Classification Module."""
 
-from sklearn import linear_model
+from sklearn import svm
 
 
 def Logistic_Regression_Model(random_state):
     """
-    Creates and returns an untrained Logistic Regression model.
+    Creates and returns an untrained Support Vector Classifier configured
+    with a linear kernel to perform binary classification.
     Arguments:
-        random_stat (int) used to set the random seed for reproducibility.
+        random_state (int) used to set the random seed for reproducibility.
     Returns:
-        model: An instance of sklearn.linear_model.LogisticRegression
+        model: An instance of sklearn.svm.SVC
     """
-    return linear_model.LogisticRegression(random_state=random_state)
+    v = svm.SVC(kernel='linear', probability=True, random_state=random_state)
+    return v
