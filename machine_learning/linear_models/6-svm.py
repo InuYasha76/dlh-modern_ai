@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
-"""Support Vector Classification Module."""
+"""SVM Classifier Module."""
 
 from sklearn import svm
 
 
-def Logistic_Regression_Model(random_state):
+def get_SVM_model(name, random_state):
     """
-    Creates and returns an untrained Support Vector Classifier configured
-    with a linear kernel to perform binary classification.
+    Creates and returns an untrained Support Vector Classifier (SVC).
     Arguments:
-        random_state (int) used to set the random seed for reproducibility.
+        name: A string indicating the kernel type ('linear', 'poly', or 'rbf').
+        random_state: An integer used to set the random seed for reproducibility.
     Returns:
-        model: An instance of sklearn.svm.SVC
+        model: An untrained instance of sklearn.svm.SVC
     """
-    v = svm.SVC(kernel='linear', probability=True, random_state=random_state)
-    return v
+    return svm.SVC(kernel=name, random_state=random_state)
