@@ -13,20 +13,23 @@ def clean_total_charges(df, method="drop"):
     Returns:
         pandas.DataFrame: The modified DataFrame.
     """
+    if type(df).__name__ != "DataFrame" or df.empty or len(df.columns) == 0:
+        return 1
+    if method not in ["drop", "median", "impute"]:
+        return 1
+    if "TotalCharges" not in df.columns:
+        return 1
+    if (method == "impute"
+            and ("MonthlyCharges" not in df.columns
+                 or "tenure" not in df.columns)):
+        return 1
     df_copy = df.copy()
-
     if method == "drop":
         return df_copy.dropna(subset=["TotalCharges"])
-
-    elif method == "median":
+    if method == "median":
         median = df_copy["TotalCharges"].median()
         df_copy.loc[:, "TotalCharges"] = df_copy["TotalCharges"].fillna(median)
-
-    elif method == "impute":
+    if method == "impute":
         imput = df_copy["MonthlyCharges"] * df_copy["tenure"]
         df_copy.loc[:, "TotalCharges"] = df_copy["TotalCharges"].fillna(imput)
-
-    else:
-        raise ValueError(f"Unknown cleaning method: {method}")
-
     return df_copy

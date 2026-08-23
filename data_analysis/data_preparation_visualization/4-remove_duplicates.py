@@ -12,4 +12,6 @@ def remove_duplicates(df):
     Returns:
         pandas.DataFrame: The deduplicated DataFrame.
     """
+    if type(df).__name__ != "DataFrame":
+        return 1
     return df.drop_duplicates()

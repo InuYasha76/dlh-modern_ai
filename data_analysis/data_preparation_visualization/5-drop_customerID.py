@@ -12,4 +12,6 @@ def drop_customerID(df):
     Returns:
         pandas.DataFrame: The modified DataFrame without the customerID column.
     """
+    if type(df).__name__ != "DataFrame" or "customerID" not in df.columns:
+        return 1
     return df.drop(columns=["customerID"])

@@ -14,9 +14,15 @@ def plot_missingness(df):
     Returns:
         None
     """
+    if type(df).__name__ != "DataFrame":
+        return 1
+    if df.empty or len(df.columns) == 0:
+        return 1
+    row_idx, col_idx = np.where(df.isna())
     plt.figure(figsize=(12, 8))
-    plt.scatter(np.where(df.isna())[0], np.where(df.isna())[1], marker="|")
+    plt.scatter(row_idx, col_idx, marker="|")
     plt.yticks(range(len(df.columns)), df.columns)
     plt.title("Missingness Plot")
     plt.tight_layout()
     plt.show()
+    return 0

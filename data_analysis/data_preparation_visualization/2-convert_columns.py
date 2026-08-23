@@ -15,7 +15,16 @@ def convert_columns(df):
     Returns:
         pandas.DataFrame: The modified DataFrame.
     """
+    if not isinstance(df, pd.DataFrame) or df.empty or len(df.columns) == 0:
+        return 1
+    if "TotalCharges" not in df.columns or "SeniorCitizen" not in df.columns:
+        return 1
     # astype(float) does not handle missing values and crashes with value = ' '
     df["TotalCharges"] = pd.to_numeric(df["TotalCharges"], errors="coerce")
-    df["SeniorCitizen"] = df["SeniorCitizen"].map({0: "No", 1: "Yes"})
+    df["SeniorCitizen"] = df["SeniorCitizen"].replace({
+        0: "No",
+        1: "Yes",
+        "0": "No",
+        "1": "Yes"
+    })
     return df

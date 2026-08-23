@@ -18,6 +18,9 @@ def plot_numeric_vs_churn(df, col):
         None
         Plot the distribution by churn of the column.
     """
+    if (type(df).__name__ != "DataFrame" or df.empty
+            or "Churn" not in df.columns or col not in df.columns):
+        return 1
     plt.figure(figsize=(12, 8))
     churn_no = df.loc[df["Churn"] == "No", col].dropna()
     churn_yes = df.loc[df["Churn"] == "Yes", col].dropna()
@@ -26,3 +29,4 @@ def plot_numeric_vs_churn(df, col):
     plt.xlabel(col)
     plt.legend(title="Churn")
     plt.show()
+    return 0

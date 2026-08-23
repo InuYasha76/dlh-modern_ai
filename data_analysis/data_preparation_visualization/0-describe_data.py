@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
+"""This script is about exploratory data analysis"""
 import pandas as pd
+
 
 df = pd.read_csv("Telco-Customer-Churn.csv")
 shape = df.shape

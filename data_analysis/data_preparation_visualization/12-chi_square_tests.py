@@ -17,6 +17,9 @@ def chi_square_tests(df):
     Return:
         A dictionary, mapping feature names to their Chi-square p-values.
     """
+    if (type(df).__name__ != "DataFrame" or df.empty
+            or "Churn" not in df.columns):
+        return 1
     categorical_cols = df.select_dtypes(include=['object']).columns
     features = [col for col in categorical_cols
                 if col not in ['Churn', 'customerID']]
@@ -24,6 +27,7 @@ def chi_square_tests(df):
     for col in features:
         subset = df[[col, 'Churn']].dropna()
         contingency_table = pd.crosstab(subset[col], subset['Churn'])
-        _, p, _, _ = stats.chi2_contingency(contingency_table)
-        results[col] = p
+        if contingency_table.shape[0] > 1 and contingency_table.shape[1] > 1:
+            _, p, _, _ = stats.chi2_contingency(contingency_table)
+            results[col] = p
     return results

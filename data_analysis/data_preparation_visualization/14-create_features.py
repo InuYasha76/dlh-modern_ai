@@ -17,6 +17,9 @@ def create_features(df):
     Returns:
         The modified DataFrame.
     """
+    if (not isinstance(df, pd.DataFrame) or df.empty
+            or "tenure" not in df.columns):
+        return 1
     service_cols = [
         "MultipleLines",
         "InternetService",
@@ -27,9 +30,7 @@ def create_features(df):
         "StreamingTV",
         "StreamingMovies",
     ]
-
     available_service_cols = [col for col in service_cols if col in df.columns]
-
     df["NumServices"] = 0
     for col in available_service_cols:
         if col == "InternetService":
@@ -38,22 +39,17 @@ def create_features(df):
             )
         else:
             df["NumServices"] += df[col].eq("Yes").astype(int)
-
     tenure_bins = [0, 12, 24, 48, 60, float("inf")]
     tenure_labels = ["0-12", "13-24", "25-48", "49-60", "60+"]
-
     df["TenureGroup"] = pd.cut(
         df["tenure"],
         bins=tenure_bins,
         labels=tenure_labels,
-        include_lowest=False,
+        include_lowest=True,
         right=True
     )
-
     cols_to_drop = [col for col in available_service_cols if col in df.columns]
     if "tenure" in df.columns:
         cols_to_drop.append("tenure")
-
     df.drop(columns=cols_to_drop, inplace=True)
-
     return df

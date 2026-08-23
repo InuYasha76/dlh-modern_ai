@@ -21,9 +21,15 @@ def plot_continuous_distributions(df, columns_to_plot=None):
     -   None
         The function displays the plot grid and saves it to 'Task_8.png'.
     """
+    if type(df).__name__ != "DataFrame" or df.empty:
+        return 1
     if columns_to_plot is None:
         cols = df.select_dtypes(include=["number"]).columns.tolist()
         columns_to_plot = cols
+    else:
+        columns_to_plot = [col for col in columns_to_plot if col in df.columns]
+    if not columns_to_plot:
+        return 1
     n_cols = len(columns_to_plot)
     fig, axes = plt.subplots(n_cols, 2, figsize=(10, 3*n_cols))
     if n_cols == 1:
@@ -41,3 +47,4 @@ def plot_continuous_distributions(df, columns_to_plot=None):
     plt.tight_layout()
     plt.savefig("Task_8.png")
     plt.show()
+    return 0

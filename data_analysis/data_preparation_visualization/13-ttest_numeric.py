@@ -15,6 +15,9 @@ def ttest_numeric(df):
     Returns:
             A dictionary mapping feature names to Welch's t-test p-values.
     """
+    if (type(df).__name__ != "DataFrame" or df.empty
+            or "Churn" not in df.columns):
+        return 1
     numeric_cols = df.select_dtypes(include=["number"]).columns
     results = {}
     for col in numeric_cols:
