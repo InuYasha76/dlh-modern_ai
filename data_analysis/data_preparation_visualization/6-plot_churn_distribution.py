@@ -19,7 +19,13 @@ def plot_churn_distribution(df):
     if type(df).__name__ != "DataFrame" or "Churn" not in df.columns:
         return 1
     plt.figure(figsize=(12, 8))
-    df['Churn'].value_counts().plot.bar(color=['skyblue', 'salmon'])
+    churn_counts = df['Churn'].value_counts()
+    colors = [
+        'skyblue' if index == 'No'
+        else 'salmon'
+        for index in churn_counts.index
+    ]
+    plt.bar(churn_counts.index, churn_counts.values, color=colors)
     plt.title("Churn Distribution")
     plt.ylabel("Count")
     plt.show()
