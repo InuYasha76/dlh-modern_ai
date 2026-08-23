@@ -19,6 +19,7 @@ def scale_numeric(df):
     numeric_cols = ['MonthlyCharges', 'TotalCharges']
     if not all(col in df.columns for col in numeric_cols):
         return 1
+    df_copy = df.copy()
     scaler = preprocessing.StandardScaler()
-    df[numeric_cols] = scaler.fit_transform(df[numeric_cols])
-    return df
+    df_copy[numeric_cols] = scaler.fit_transform(df_copy[numeric_cols])
+    return df_copy
