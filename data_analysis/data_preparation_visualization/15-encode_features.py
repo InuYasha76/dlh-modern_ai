@@ -31,10 +31,9 @@ def encode_features(df):
     churn_le = preprocessing.LabelEncoder()
     df["Churn"] = churn_le.fit_transform(df["Churn"])
     # Step 2: OrdinalEncoder for binary columns
-    binary_oe = preprocessing.OrdinalEncoder(
-        categories=[['No', 'Yes']] * len(binary_cols)
-    )
-    df[binary_cols] = binary_oe.fit_transform(df[binary_cols]).astype(int)
+    binary_oe = preprocessing.OrdinalEncoder(categories=[['No', 'Yes']])
+    for col in binary_cols:
+        df[col] = binary_oe.fit_transform(df[[col]]).astype(int)
     # Step 3: One-hot encoding for Contract and PaymentMethod
     df = pd.get_dummies(
         df,
