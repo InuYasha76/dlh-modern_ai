@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""Lasso Regression Module."""
-
+"""Build and return an untrained Lasso Regression model."""
 from sklearn import linear_model
 
 
 def lasso_regression(random_state):
-    """
-    Creates and returns an untrained Lasso Regression model.
-    Arguments:
-        random_state: (int) used to set the random seed for reproducibility.
+    """Create and return an untrained Lasso Regression model.
+
+    Args:
+        random_state (int): Seed used by the random number generator.
+
     Returns:
-        model: An instance of sklearn.linear_model.Lasso
+        linear_model.Lasso: An untrained Lasso regression model.
     """
     return linear_model.Lasso(random_state=random_state)

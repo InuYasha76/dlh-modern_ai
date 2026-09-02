@@ -1,23 +1,30 @@
 #!/usr/bin/env python3
 """SHAP Model Explainability Module."""
 
-import shap
-
 
 def get_shap_explainer_and_values(model, X_train, X_test):
-    """
-    Creates a SHAP explainer using background training data and calculates
-    SHAP values for the test set.
-    Arguments:
-        model: A trained regression model (standard, Ridge, Lasso, Tree-based).
-        X_train: Array or DataFrame input data used as the background dataset.
-        X_test: Array-like or DataFrame input data to compute explanations for.
+    """Create a SHAP explainer and compute SHAP values for test data.
+
+    Args:
+        model: A trained regression or classification model.
+        X_train: Input data used as background dataset.
+        X_test: Input data to compute explanations for.
+
     Returns:
-        tuple: (explainer, shap_values)
-            - explainer: The initialized shap.Explainer instance.
-            - shap_values: The computed SHAP values for X_test predictions.
+        tuple: A tuple containing:
+            - explainer: Initialized shap.Explainer instance.
+            - shap_values: Computed SHAP values for X_test predictions.
+
+    Raises:
+        ImportError: If the 'shap' package is not installed.
     """
+    try:
+        import shap
+    except ImportError as e:
+        raise ImportError(
+            "The 'shap' library is required to compute SHAP values."
+        ) from e
+
     explainer = shap.Explainer(model, X_train)
     shap_values = explainer(X_test)
-
     return explainer, shap_values

@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""Logistic Regression Classifier Module."""
-
+"""Build and return an untrained Logistic Regression model."""
 from sklearn import linear_model
 
 
 def Logistic_Regression_Model(random_state):
-    """
-    Creates and returns an untrained Logistic Regression model.
-    Arguments:
-        random_state (int) used to set the random seed for reproducibility.
+    """Create and return an untrained Logistic Regression model.
+
+    Args:
+        random_state (int): Seed used by the random number generator.
+
     Returns:
-        model: An instance of sklearn.linear_model.LogisticRegression
+        linear_model.LogisticRegression: An untrained LogisticRegression model.
     """
     return linear_model.LogisticRegression(random_state=random_state)
