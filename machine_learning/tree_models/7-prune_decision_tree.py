@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
-"""(Post-Pruning) Train and Evaluate Decision Trees with Pruning."""
+"""Train and evaluate decision trees with cost-complexity pruning."""
 from sklearn import tree
-train_tree = __import__('1-train').train_tree
+
+try:
+    train_tree = __import__('1-train').train_tree
+except ImportError:
+    def train_tree(clf, X, y):
+        clf.fit(X, y)
 
 
 def prune_and_evaluate_trees(
@@ -14,25 +19,23 @@ def prune_and_evaluate_trees(
     min_samples_leaf,
     min_samples_split,
 ):
-    """
-    Trains multiple decision tree classifiers over a range of cost-complexity
-    pruning parameters (ccp_alpha) and evaluates their performance.
-    This function helps analyze how different pruning strengths affect model
-    complexity and performance.
-    Arguments:
-        X_train, y_train: Training data and labels
-        X_test, y_test: Testing data and labels
-        ccp_alphas: A NumPy array of pruning alpha values to use for training
-                      different trees.
-        random_state: Integer seed for reproducibility.
-        min_samples_leaf: (int) Minimum number of samples required at leaf node
-        min_samples_split: (int) Minimum number of samples required to split an
-                            internal node
+    """Train multiple decision tree classifiers over pruning alphas.
+
+    Args:
+        X_train: Training feature data.
+        y_train: Training labels.
+        X_test: Testing feature data.
+        y_test: Testing labels.
+        ccp_alphas: Array of pruning alpha values to evaluate.
+        random_state (int): Seed used by the random number generator.
+        min_samples_leaf (int): Minimum number of samples required at a leaf.
+        min_samples_split (int): Minimum number of samples required to split.
+
     Returns:
-        clfs: A list of trained DecisionTreeClassifier instances, each
-                corresponding to a ccp_alpha value.
-        train_scores: A list of training accuracy scores for each classifier.
-        test_scores: A list of testing accuracy scores for each classifier.
+        tuple[list, list, list]: A tuple containing:
+            - clfs: List of trained DecisionTreeClassifier instances.
+            - train_scores: List of training accuracy scores for each tree.
+            - test_scores: List of testing accuracy scores for each tree.
     """
     clfs = []
     train_scores = []

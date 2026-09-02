@@ -4,15 +4,16 @@ import numpy as np
 
 
 def feature_importance(rf):
-    """
-    Computes and returns the feature importances from a trained
-    random forest model.
+    """Compute and return feature importances from a Random Forest model.
+
     Args:
         rf: A trained Scikit-learn RandomForestClassifier instance.
+
     Returns:
-        importances: A NumPy array of feature importance scores.
-        indices: A NumPy array of feature indices sorted from least
-            to most important (ascending order).
+        tuple[numpy.ndarray, numpy.ndarray]: A tuple containing:
+            - importances: Feature importance scores.
+            - indices: Feature indices sorted from least to most important
+              (ascending order).
     """
     importances = rf.feature_importances_
     indices = np.argsort(importances)

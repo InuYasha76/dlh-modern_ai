@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
-"""
-This module provides a function to train a Scikit-learn tree-based classifier
-on a given dataset.
-"""
+"""Train a tree-based classifier using Scikit-learn."""
 
 
 def train_tree(clf, X, y):
-    """
-    Trains a tree-based classifier using the provided features and labels.
-    Arguments:
-        clf: A Scikit-learn tree classifier instance (e.g., DecisionTree).
+    """Train a tree-based classifier using the provided features and labels.
+
+    Args:
+        clf: A Scikit-learn tree classifier instance (e.g.,
+            DecisionTreeClassifier).
         X: The input features.
         y: The target labels.
+
     Returns:
         None
     """

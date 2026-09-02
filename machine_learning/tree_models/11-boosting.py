@@ -1,24 +1,29 @@
 #!/usr/bin/env python3
-"""Compare boosting classifiers on the wine dataset."""
+"""Initialize boosting classifiers using various algorithms."""
 from sklearn import ensemble
-import xgboost as xgb
-import lightgbm as lgb
 
 
 def compare_boosting_classifiers(name, n_estimators, random_state):
-    """
-    Initializes and returns an untrained boosting classifier based on
-    the specified algorithm name.
+    """Initialize and return an untrained boosting classifier.
+
     Args:
-        name: Name of the boosting algorithm. Must be one of
+        name (str): Name of the boosting algorithm. Must be one of
             'adaboost', 'gradientboosting', 'xgboost', 'lightgbm'.
-        n_estimators: Number of boosting iterations (trees).
-        random_state: Random seed for reproducibility.
+        n_estimators (int): Number of boosting iterations (trees).
+        random_state (int): Random seed for reproducibility.
+
     Returns:
-        An untrained instance of the selected boosting classifier.
+        Classifier instance: An untrained instance of the selected boosting
+            classifier.
+
     Raises:
-        ValueError: If the provided model name is invalid.
+        ValueError: If the provided model name is invalid or not a string.
     """
+    if not isinstance(name, str):
+        raise ValueError("Model name must be a string")
+
+    name = name.strip().lower()
+
     if name == "adaboost":
         model = ensemble.AdaBoostClassifier(
             n_estimators=n_estimators, random_state=random_state
@@ -28,10 +33,22 @@ def compare_boosting_classifiers(name, n_estimators, random_state):
             n_estimators=n_estimators, random_state=random_state
         )
     elif name == "xgboost":
+        try:
+            import xgboost as xgb
+        except ImportError as e:
+            raise ImportError(
+                "xgboost is required for the 'xgboost' classifier"
+            ) from e
         model = xgb.XGBClassifier(
             n_estimators=n_estimators, random_state=random_state
         )
     elif name == "lightgbm":
+        try:
+            import lightgbm as lgb
+        except ImportError as e:
+            raise ImportError(
+                "lightgbm is required for the 'lightgbm' classifier"
+            ) from e
         model = lgb.LGBMClassifier(
             n_estimators=n_estimators, random_state=random_state, verbose=-1
         )

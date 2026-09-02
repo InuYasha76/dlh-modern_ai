@@ -3,27 +3,32 @@
 
 
 def get_best_alpha(clfs, train_scores, test_scores, ccp_alphas):
-    """Select the best ccp_alpha based on the highest test accuracy,
-    best generalization gap (smallest difference between training
-    and test accuracy) and simplicity (largest alpha as tiebreaker).
+    """Select the best ccp_alpha based on evaluation metrics.
+
+    Selection is based on highest test accuracy, smallest generalization gap
+    (difference between training and testing accuracy), and model simplicity
+    (largest alpha as tiebreaker).
+
     Args:
         clfs: List of trained DecisionTreeClassifier instances.
         train_scores: List of training accuracy scores.
         test_scores: List of test accuracy scores.
         ccp_alphas: List or array of ccp_alpha values used to train clfs.
+
     Returns:
-        best_alpha: The selected ccp_alpha value.
-        best_clf: The classifier associated with best_alpha.
+        tuple: A tuple containing:
+            - best_alpha: The selected ccp_alpha value.
+            - best_clf: The classifier associated with best_alpha.
     """
     max_test_score = max(test_scores)
     candidates = [
-            i for i, score in enumerate(test_scores)
-            if (max_test_score - score) <= 1e-9
+        i for i, score in enumerate(test_scores)
+        if (max_test_score - score) <= 1e-9
     ]
-    min_gaps = min((train_scores[i] - test_scores[i]) for i in candidates)
+    min_gap = min((train_scores[i] - test_scores[i]) for i in candidates)
     candidates = [
-            i for i in candidates
-            if (train_scores[i] - test_scores[i]) - min_gaps <= 1e-9
+        i for i in candidates
+        if (train_scores[i] - test_scores[i]) - min_gap <= 1e-9
     ]
     best_index = max(candidates, key=lambda i: ccp_alphas[i])
     best_alpha = ccp_alphas[best_index]
