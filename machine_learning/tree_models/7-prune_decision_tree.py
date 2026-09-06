@@ -2,11 +2,7 @@
 """Train and evaluate decision trees with cost-complexity pruning."""
 from sklearn import tree
 
-try:
-    train_tree = __import__('1-train').train_tree
-except ImportError:
-    def train_tree(clf, X, y):
-        clf.fit(X, y)
+train_tree = __import__("1-train").train_tree
 
 
 def prune_and_evaluate_trees(
@@ -48,8 +44,12 @@ def prune_and_evaluate_trees(
             min_samples_split=min_samples_split,
             ccp_alpha=alpha,
         )
-        train_tree(clf, X_train, y_train)
+        fitted = train_tree(clf, X_train, y_train)
+        if fitted is not None:
+            clf = fitted
+
         clfs.append(clf)
         train_scores.append(clf.score(X_train, y_train))
         test_scores.append(clf.score(X_test, y_test))
+
     return clfs, train_scores, test_scores
