@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Train and evaluate decision trees with cost-complexity pruning."""
 from sklearn import tree
-
 train_tree = __import__("1-train").train_tree
 
 
@@ -47,7 +46,6 @@ def prune_and_evaluate_trees(
         fitted = train_tree(clf, X_train, y_train)
         if fitted is not None:
             clf = fitted
-
         clfs.append(clf)
         train_scores.append(clf.score(X_train, y_train))
         test_scores.append(clf.score(X_test, y_test))
