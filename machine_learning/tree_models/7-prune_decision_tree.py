@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Train and evaluate decision trees with cost-complexity pruning."""
 from sklearn import tree
-train_tree = __import__("1-train").train_tree
+train_tree = __import__('1-train').train_tree
 
 
 def prune_and_evaluate_trees(
