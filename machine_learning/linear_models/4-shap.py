@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """SHAP Model Explainability Module."""
+import shap
 
 
 def get_shap_explainer_and_values(model, X_train, X_test):
@@ -18,13 +19,6 @@ def get_shap_explainer_and_values(model, X_train, X_test):
     Raises:
         ImportError: If the 'shap' package is not installed.
     """
-    try:
-        import shap
-    except ImportError as e:
-        raise ImportError(
-            "The 'shap' library is required to compute SHAP values."
-        ) from e
-
     explainer = shap.Explainer(model, X_train)
     shap_values = explainer(X_test)
     return explainer, shap_values
